@@ -24,7 +24,9 @@ function init() {
     const approved = response.filter(d => d.approved);
     approved.reverse();
     const top = approved.slice(0, 10);
-    const string = JSON.stringify(top, null, 2);
+    const timestamp = Date.now();
+    const output = { timestamp, data: top };
+    const string = JSON.stringify(output, null, 2);
     const path = `${AWS_PATH}/data`;
     uploadToS3({ string, path, ext: 'json' })
       .then(() => {
