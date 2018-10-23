@@ -23,7 +23,7 @@ function init() {
   }).then(response => {
     const approved = response.filter(d => d.approved);
     approved.reverse();
-    const top = approved.slice(0, 10);
+    const top = approved.slice(0, 100);
     const timestamp = Date.now();
     const output = { timestamp, data: top };
     const string = JSON.stringify(output, null, 2);
