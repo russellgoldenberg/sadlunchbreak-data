@@ -22,8 +22,9 @@ function init() {
     gid: '589998460'
   }).then(response => {
     const approved = response.filter(d => d.approved);
-    approved.reverse();
+		approved.sort((a, b) => d3.descending(new Date(a.Timestamp)), new Date(b.Timestamp));
     const top = approved.slice(0, 100);
+		// const bottom = approved.slice(100, 300);
     const timestamp = Date.now();
     const output = { timestamp, data: top };
     const string = JSON.stringify(output, null, 2);
