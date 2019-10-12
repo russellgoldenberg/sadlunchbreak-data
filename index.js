@@ -33,10 +33,12 @@ function parse(response) {
 async function upload(data) {
 	const accessKeyId = process.env.AWS_KEY;
 	const secretAccessKey = process.env.AWS_SECRET;
-	const region = 'us-east-1';
+	const region = process.env.REGION;
+	const bucket = process.env.AWS_BUCKET;
+
+	console.log({ accessKeyId, secretAccessKey, region });
 	dataS3.init({ accessKeyId, secretAccessKey, region });
 
-	const bucket = process.env.AWS_BUCKET;
 	const path = 'misc/sadlunchbreak';
 	const file = 'data.json';
 	await dataS3.upload({ bucket, path, file, data });
