@@ -38,13 +38,14 @@ function parse(response) {
 async function upload(data) {
 	const path = 'misc/sadlunchbreak';
 	const file = 'data.json';
+	
 	await dataS3.upload({ bucket, path, file, data });
 	process.exit();
 }
 
 function init() {
 	dataS3.init({ accessKeyId, secretAccessKey, region });
-	
+
 	downloadSheet(SHEET_OPTS)
 		.then(parse)
 		.then(upload)
