@@ -10,8 +10,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"d3": "5.7.0",
-		"data-s3": "1.2.1",
+		"d3": "5.12.0",
+		"data-s3": "1.2.2",
 		"request": "2.88.0"
 	}
 }
