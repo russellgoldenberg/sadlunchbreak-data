@@ -2,6 +2,11 @@ const request = require('request');
 const d3 = require('d3');
 const dataS3 = require('data-s3');
 
+const accessKeyId = process.env.AWS_KEY;
+const secretAccessKey = process.env.AWS_SECRET;
+const region = process.env.AWS_REGION;
+const bucket = process.env.AWS_BUCKET;
+
 const SHEET_OPTS = {
 	id: '14q0-XFUKBGJSbUjkn79haheJSQ5EdCN1vt_fOI79COI',
 	gid: '589998460'
@@ -31,14 +36,6 @@ function parse(response) {
 }
 
 async function upload(data) {
-	const accessKeyId = process.env.AWS_KEY;
-	const secretAccessKey = process.env.AWS_SECRET;
-	const region = process.env.REGION;
-	const bucket = process.env.AWS_BUCKET;
-
-	console.log({ accessKeyId, secretAccessKey, region });
-	dataS3.init({ accessKeyId, secretAccessKey, region });
-
 	const path = 'misc/sadlunchbreak';
 	const file = 'data.json';
 	await dataS3.upload({ bucket, path, file, data });
@@ -46,6 +43,8 @@ async function upload(data) {
 }
 
 function init() {
+	dataS3.init({ accessKeyId, secretAccessKey, region });
+	
 	downloadSheet(SHEET_OPTS)
 		.then(parse)
 		.then(upload)
