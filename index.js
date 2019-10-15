@@ -44,7 +44,6 @@ async function upload(data) {
 }
 
 function init() {
-	console.log({ accessKeyId, secretAccessKey, region });
 	dataS3.init({ accessKeyId, secretAccessKey, region });
 
 	downloadSheet(SHEET_OPTS)
